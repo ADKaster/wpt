@@ -52,5 +52,9 @@ def env_extras(**kwargs):
 
 
 class LadybirdBrowser(WebDriverBrowser):
+    def __init__(self, logger, binary=None, webdriver_binary=None, webdriver_args=None, **kwargs):
+        super().__init__(logger, binary, webdriver_binary, webdriver_args, supports_bidi=False,
+                         **kwargs)
+
     def make_command(self):
         return [self.webdriver_binary, "--port", str(self.port)] + self.webdriver_args
