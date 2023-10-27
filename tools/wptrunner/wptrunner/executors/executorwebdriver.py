@@ -456,6 +456,7 @@ class WebDriverProtocol(Protocol):
                 }
             })
 
+        self.enable_bidi = browser.bidi
         self.url = browser.webdriver_url
         self.webdriver = None
 
@@ -466,7 +467,7 @@ class WebDriverProtocol(Protocol):
         host, port = self.url.split(":")[1].strip("/"), self.url.split(':')[-1].strip("/")
 
         capabilities = {"alwaysMatch": self.capabilities}
-        self.webdriver = Session(host, port, capabilities=capabilities)
+        self.webdriver = Session(host, port, enable_bidi=self.enable_bidi, capabilities=capabilities)
         self.webdriver.start()
 
     def teardown(self):

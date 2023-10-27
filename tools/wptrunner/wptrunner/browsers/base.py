@@ -284,7 +284,7 @@ class WebDriverBrowser(Browser):
 
     def __init__(self, logger, binary=None, webdriver_binary=None,
                  webdriver_args=None, host="127.0.0.1", port=None, base_path="/",
-                 env=None, supports_pac=True, **kwargs):
+                 env=None, supports_pac=True, supports_bidi=True, **kwargs):
         super().__init__(logger)
 
         if webdriver_binary is None:
@@ -298,6 +298,7 @@ class WebDriverBrowser(Browser):
         self.host = host
         self._port = port
         self._supports_pac = supports_pac
+        self.bidi = supports_bidi
 
         self.base_path = base_path
         self.env = os.environ.copy() if env is None else env
@@ -413,6 +414,7 @@ class WebDriverBrowser(Browser):
                                  "host": self.host,
                                  "port": self.port,
                                  "pac": self.pac,
+                                 "bidi": self.bidi,
                                  "env": self.env}
 
     def settings(self, test):
